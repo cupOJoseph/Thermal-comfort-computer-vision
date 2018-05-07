@@ -35,24 +35,34 @@ thermalImg = loadIR(thermal)
 params = cv2.SimpleBlobDetector_Params()
 
 # Change thresholds
-params.minThreshold = 40
-params.maxThreshold = 150
+params.minThreshold = 20
+params.maxThreshold = 200
+
 
 # Filter by Area.
 params.filterByArea = True
-params.minArea = 1500
+params.minArea = 16
+params.maxArea = 500
 
 # Filter by Circularity
 params.filterByCircularity = False
 params.minCircularity = 0.05
 
 # Filter by Convexity
-params.filterByConvexity = True
+params.filterByConvexity = False
 params.minConvexity = 0.87
 
 # Filter by Inertia
-params.filterByInertia = True
+params.filterByInertia = False
 params.minInertiaRatio = 0.01
+
+params.filterByColor = False
+
+print params.filterByColor
+print params.filterByArea
+print params.filterByCircularity
+print params.filterByInertia
+print params.filterByConvexity
 
 # Create a detector with the parameters
 ver = (cv2.__version__).split('.')
@@ -63,7 +73,7 @@ else :
 
 
 # Detect blobs.
-im = cv2.imread(thermalImg, cv2.IMREAD_GRAYSCALE)
+im = cv2.imread("data/2018.01.22-19.41.50_11", cv2.IMREAD_GRAYSCALE)
 keypoints = detector.detect(im)
 
 #===================== display

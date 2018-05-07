@@ -12,13 +12,14 @@ im = cv2.imread("regface.png", cv2.IMREAD_GRAYSCALE)
 params = cv2.SimpleBlobDetector_Params()
 
 # Change thresholds
-params.minThreshold = 70
+params.minThreshold = 20
 params.maxThreshold = 200
 
 
 # Filter by Area.
 params.filterByArea = True
-params.minArea = 8
+params.minArea = 16
+params.maxArea = 500
 
 # Filter by Circularity
 params.filterByCircularity = False
@@ -29,8 +30,16 @@ params.filterByConvexity = False
 params.minConvexity = 0.87
 
 # Filter by Inertia
-params.filterByInertia = True
+params.filterByInertia = False
 params.minInertiaRatio = 0.01
+
+params.filterByColor = False
+
+print params.filterByColor
+print params.filterByArea
+print params.filterByCircularity
+print params.filterByInertia
+print params.filterByConvexity
 
 # Create a detector with the parameters
 ver = (cv2.__version__).split('.')
