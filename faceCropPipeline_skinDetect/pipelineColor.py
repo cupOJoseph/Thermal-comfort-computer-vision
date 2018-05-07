@@ -18,7 +18,8 @@ def loadBGR(filename):
 # color = "../data/2018.01.22-19.34.02_01" # sort of works, hair
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 color = "../data/binary/karl_color" # karl
-color = '../small_sets/2018.01.22-13.26.35_01' # ab
+color = "../data/2018.01.22-19.41.50_01" # color #karl
+# color = '../small_sets/2018.01.22-13.26.35_01' # ab
 # color = "../data/2018.01.22-19.38.35_01" # wg
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -60,8 +61,6 @@ print("Found {0} faces!".format(n))
 if n == 0:
 	print "--No faces detected. Quitting."
 	sys.exit(0)
-
-
 
 # Average results
 x = 0
@@ -262,7 +261,7 @@ cv2.drawContours(cImg, contours, -1, (0,255,0), 2,maxLevel=0)
 ellipse = cv2.fitEllipse(contours[0])
 # (x,y),(MA,ma),angle = cv2.fitEllipse(contours[0])
 cv2.ellipse(cImg, ellipse, (255,255,0), 2)
-# cv2.imshow("contours",cImg)
+cv2.imshow("contours",cImg)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Create a mask that is the shape of the ellipse
