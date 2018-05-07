@@ -5,26 +5,27 @@ import cv2
 import numpy as np;
 
 # Read image
-im = cv2.imread("thermalface.png", cv2.IMREAD_GRAYSCALE)
+im = cv2.imread("regface.png", cv2.IMREAD_GRAYSCALE)
+#img = cv2.cvtColor(im, cv2.COLOR_BGR2HSV)
 
 # Setup SimpleBlobDetector parameters.
 params = cv2.SimpleBlobDetector_Params()
 
 # Change thresholds
-params.minThreshold = 10
-params.maxThreshold = 150
+params.minThreshold = 70
+params.maxThreshold = 200
 
 
 # Filter by Area.
 params.filterByArea = True
-params.minArea = 1500
+params.minArea = 8
 
 # Filter by Circularity
-params.filterByCircularity = True
+params.filterByCircularity = False
 params.minCircularity = 0.05
 
 # Filter by Convexity
-params.filterByConvexity = True
+params.filterByConvexity = False
 params.minConvexity = 0.87
 
 # Filter by Inertia
