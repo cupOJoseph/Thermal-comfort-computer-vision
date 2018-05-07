@@ -13,11 +13,13 @@ def loadBGR(filename):
 	return array
 
 
-# color = "../data/2018.01.22-19.35.53_01" # color #won't work, glasses
-color = "../data/2018.01.22-19.41.50_01" # color #karl
-# color = "../data/2018.01.22-19.34.02_01" # color
-# color = "../data/2018.01.22-19.38.35_01" # color
-# color = "../data/2018.01.22-21.32.34_01" # color #doesnt work
+# color = "../data/2018.01.22-19.35.53_01" # doesn't work, glasses
+# color = "../data/2018.01.22-21.32.34_01" # doesn't work, color
+# color = "../data/2018.01.22-19.34.02_01" # sort of works, hair
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+color = "../data/binary/karl_color" # karl
+color = '../small_sets/2018.01.22-13.26.35_01' # ab
+# color = "../data/2018.01.22-19.38.35_01" # wg
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Load the BGR image
@@ -277,7 +279,7 @@ ellipseHead = cv2.bitwise_and(headFrame, headFrame, mask = eMask)
 ellipseHead = cv2.cvtColor(ellipseHead, cv2.COLOR_HSV2BGR)
 cv2.imshow("ellipseHead",ellipseHead)
 
-cv2.imwrite("karlHeadColor.png",ellipseHead)
+# cv2.imwrite("../results/karlHeadColor.png",ellipseHead)
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

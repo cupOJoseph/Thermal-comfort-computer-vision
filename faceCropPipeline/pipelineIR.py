@@ -15,7 +15,8 @@ def loadIR(filename):
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Load the IR image
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-thermal = "../data/2018.01.22-19.41.50_11" #thermal
+# thermal = '../data/binary/ab_ir' # ab 
+thermal = '../data/binary/karl_ir' # karl
 frame = loadIR(thermal)
 gray = frame.copy()
 MINSIZE = (40, 40)
@@ -94,7 +95,7 @@ x2 = x+int(w*1.1)
 y1 = y-int(h*0.2)
 y2 = y+int(h*1.2)
 headFrame = frame[y1:y2, x1:x2]
-# cv2.imshow("head frame",headFrame)
+cv2.imshow("head frame",headFrame)
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -169,7 +170,7 @@ upper = np.array([25, 175, 255], dtype = "uint8")
 
 
 # apply the mask to the frame
-skinMask = cv2.inRange(headFrame, 127, 255)
+skinMask = cv2.inRange(headFrame, 50, 255)
 # cv2.imshow("skinMask",skinMask)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -266,7 +267,7 @@ ellipseHead = cv2.bitwise_and(headFrame, headFrame, mask = eMask)
 # ellipseHead = cv2.cvtColor(ellipseHead, cv2.COLOR_HSV2BGR)
 cv2.imshow("ellipseHeadIR",ellipseHead)
 
-cv2.imwrite("karlHeadIR.png",ellipseHead)
+# cv2.imwrite("../results/karlHeadIR.png",ellipseHead)
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
