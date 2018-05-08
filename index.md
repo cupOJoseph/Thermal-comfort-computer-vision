@@ -1,4 +1,6 @@
 By Karl Preisner and Joseph Schiarizzi
+---
+---
 
 # Why
 ### Real Problem
@@ -12,10 +14,11 @@ Karl Regular 1
 ![Karl]() <br>
 Karl IR
 
+![karl2]()<br>
 This is an older picture of Karl.
 
+![karlir2]()<br>
 Karl 2 IR
-
 
 
 ### Goal
@@ -47,7 +50,9 @@ Less useful
 More useful
 
 
-Our points of interest are places where there is an especially dark blob in a light section or especially light blob in a dark section.  Being good insulators, the eyebrows seems to always get caught with a large detect, which could be better.
+Our points of interest are places where there is an especially dark blob in a light section or especially light blob in a dark section.  Being good insulators, the eyebrows seems to often get caught with a large detect, which could be better, but also makes sense. Aligning the key points must also be done a bit intelligently since a the faces are not perfectly aligned between the regular/IR images nor are the image proportions the same.
+
+![final](https://i.imgur.com/fGQRBme.png)
 
 # Conclusions
 

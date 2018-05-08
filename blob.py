@@ -64,11 +64,18 @@ w_ratio = reg_w / reg_h
 
 keypoints_reg = keypoints
 
-for idx, point in enumerate(keypoints):
-    print(idx, point)
+# TODO align keypoint onto regular face with different dimensions
+#for idx, point in enumerate(keypoints_reg):
+	#keypoints_reg[idx].pt[0][0] *= h_ratio
+	#keypoints_reg[idx].pt[0][0] *= w_ratio
+	# weird math prolem that wont let me assign the value to it... I quit
+
+print("===")
+for point in keypoints_reg:
+	print(point.pt)
 
 im_with_keypoints = cv2.drawKeypoints(im, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-#translated_im = cv2.drawKeypoints(reg_im, keypoints_reg, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+translated_im = cv2.drawKeypoints(reg_im, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 # Show blobs
 cv2.imshow("Keypoints", im_with_keypoints)
 cv2.imshow("Translated", translated_im)
