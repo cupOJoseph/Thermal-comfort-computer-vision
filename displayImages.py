@@ -73,7 +73,7 @@ else :
 
 
 # Detect blobs.
-im = cv2.imread("data/2018.01.22-19.41.50_11", cv2.IMREAD_GRAYSCALE)
+im = cv2.imread("data/karl_ir_crop.png", cv2.IMREAD_GRAYSCALE)
 keypoints = detector.detect(im)
 
 #===================== display
