@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-import sys
+import sys,os
 
 
 # def auto_canny(image, sigma=0.33):
@@ -21,10 +21,22 @@ def loadBGR(filename):
 	array = array.reshape((kHeightRGB, kWidthRGB, kChannelsRGB))
 	return array
 
-color1 = "../karl_binaryAll/2018.01.22-19.41.50_01" #karl
-color2 = "../karl_binaryAll/2018.01.22-19.41.50_10" #karl
-# color1 = '../small_sets/2018.01.22-13.26.35_01' # ab
-# color2 = '../small_sets/2018.01.22-13.26.35_10' # ab
+# good files: karl1, karl4, karl5
+
+# filename = "Andrei4" # Andrei1 - Andrei4
+filename = "Karl5" # Karl1 - Karl5
+dataLocation = "/Users/karlpreisner/Workspace/gwu/computerVision/Thermal-comfort-computer-vision/karlAndrei/"+filename+"/"
+color1 = ""
+color2 = ""
+
+files = os.listdir(dataLocation)
+for f in files: # this loop isn't optimized, but who cares
+	if f.endswith("_01"):
+		color1 = dataLocation+f
+		print "color1",color1
+	if f.endswith("_10"):
+		color2 = dataLocation+f
+		print "color2",color2
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Load the binary files as bgr
@@ -32,6 +44,7 @@ color2 = "../karl_binaryAll/2018.01.22-19.41.50_10" #karl
 img1 = loadBGR(color1)
 img2 = loadBGR(color2)
 MINSIZE = (200, 200)
+cv2.imshow('original',img1)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Face detection (img1)
@@ -85,6 +98,8 @@ img2 = img2[y1:y2, x1:x2, :]
 headFrame1 = img1
 headFrame2 = img2
 
+
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Auto_canny
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -96,7 +111,6 @@ img2 = auto_canny(img2)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 diff = abs(img1 - img2)
 cv2.imshow("canny difference",diff)
-
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

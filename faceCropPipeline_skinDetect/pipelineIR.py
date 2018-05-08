@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-import sys
+import sys, os
 import matplotlib.pyplot as plt
 
 def loadIR(filename):
@@ -15,8 +15,17 @@ def loadIR(filename):
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Load the IR image
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# thermal = '../data/binary/ab_ir' # ab 
-thermal = '../data/binary/karl_ir' # karl
+# filename = "Andrei4" # Andrei1 - Andrei4
+filename = "Karl1" # Karl1 - Karl5
+dataLocation = "/Users/karlpreisner/Workspace/gwu/computerVision/Thermal-comfort-computer-vision/karlAndrei/"+filename+"/"
+thermal = ""
+
+files = os.listdir(dataLocation)
+for f in files: # this loop isn't optimized, but who cares
+	if f.endswith("_11"):
+		thermal = dataLocation+f
+
+
 frame = loadIR(thermal)
 gray = frame.copy()
 MINSIZE = (40, 40)
@@ -75,7 +84,7 @@ h = int(h / n)
 # cv2.rectangle(frame, (x-int(w*0.1), y-int(h*0.2)), (x+int(w*1.1), y+int(h*1.2)), (0, 255, 0), 1) # larger
 # cv2.rectangle(frame, (x+int(w*0.15), y+int(h*0.15)), (x+int(w*0.85), y+int(h*0.85)), (0, 255, 255), 1) # smaller 
 
-# cv2.imshow("Face found", frame)
+cv2.imshow("Face found", frame)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Extract the skin region of the face
