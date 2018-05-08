@@ -8,17 +8,11 @@ Sometimes people are hot and people are cold so they change the temperature in t
 
 The process of deciding the temperature should be automated, which requires a computer to understand whether the human is comfortable or not.
 
-![Karl regular]()<br>
+![Karl regular](https://i.imgur.com/6wLcmen.png)<br>
 Karl Regular 1
 
-![Karl]() <br>
+![Karl ir](https://i.imgur.com/OuMFuOl.png) <br>
 Karl IR
-
-![karl2]()<br>
-This is an older picture of Karl.
-
-![karlir2]()<br>
-Karl 2 IR
 
 
 ### Goal
