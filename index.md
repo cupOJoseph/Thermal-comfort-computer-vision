@@ -49,9 +49,7 @@ After an ellipse of the face is found, we want to detect the hottest features on
 #### Color image:
 1. Run harr cascade face detection on the first image.
 
-2. Since the result of the face detection only returns a rough area of where it thinks the face is, we extend the detected face region by a substantial percentage so that the entire head is in the frame. At this point, we crop out the head region in the 1st and 10th images of the headshot sequence.
-
-Below is what we have after the first two steps. The green box is the result of the harr cascade face detection. The blue box is the region that we crop out to use for the remaining steps.
+2. Since the result of the face detection only returns a rough area of where it thinks the face is, we extend the detected face region by a substantial percentage so that the entire head is in the frame. At this point, we crop out the head region in the 1st and 10th images of the headshot sequence.<br>Below is what we have after the first two steps. The green box is the result of the harr cascade face detection. The blue box is the region that we crop out to use for the remaining steps.
 [img]
 
 3. Then, we run Canny edge detector on the two headshot images. Canny returns a binary image where only strong edges are detected.
@@ -78,9 +76,7 @@ Below is what we have after the first two steps. The green box is the result of 
 #### Thermal image:
 1. Run harr cascade face detection on the first image.
 
-2. Since the result of the face detection only returns a rough area of where it thinks the face is, we extend the detected face region by a substantial percentage so that the entire head is in the frame. At this point, we crop out the head region in the 1st image.
-
-Below is what we have after the first two steps. The green box is the result of the harr cascade face detection. The blue box is the region that we crop out to use for the remaining steps.
+2. Since the result of the face detection only returns a rough area of where it thinks the face is, we extend the detected face region by a substantial percentage so that the entire head is in the frame. At this point, we crop out the head region in the 1st image.<br>Below is what we have after the first two steps. The green box is the result of the harr cascade face detection. The blue box is the region that we crop out to use for the remaining steps.
 [img]
 
 3. Now, we threshold the grayscale image with a simple threshold of [50,255].
@@ -91,7 +87,7 @@ Below is what we have after the first two steps. The green box is the result of 
 
 5. We keep the largest object of the image (the head). This helps erase edges that were in the background of the image.
 
-6. Then we perform dilate the image.
+6. Then we dilate the image again.
 
 7. Now that we have a single connected component, we are able to find the contours of the binary image. 
 [img]
