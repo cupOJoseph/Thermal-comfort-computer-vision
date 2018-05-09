@@ -28,28 +28,30 @@ Karl IR
 
 ### Our goals for this class project
 Our goals for this project are:
-1. Extract the facial region of each image (both color and thermal)
+1. Fit an ellipse to the facial region of each image (both color and thermal).
 2. Detect specific regions on the face that have the potential to be useful for predicting thermal comfort.
 
-These two goals are small pieces of a long-term research project to predict the thermal comfort of a person.
+These two goals are small pieces of a long-term research project to predict the thermal comfort of a person. For the most part, Karl worked on part 1 and Joseph worked on part 2.
 
-### Part 1
+### Part 1: Face ellipse
+The first step in preparing the data for machine learning is to extract the facial region of both the color and thermal images. We decided that the preprocessed data would be best for the machine learning model if we fit an ellipse around the face. That way, if the cropped face ellipse is rotated, it is simple math to translate it such that the axes are square for all images. After that, we can easily scale the rotated face ellipses so that all of the faces ellipses are the same sized image.
 
-### Part 2
-Detect the hottest features on the face and regions of interest.  Initially The goal was to line up checks, forehead, lips, etc. in the IR image and the regular image, but this was challenging and potentially not as useful.  Next, we tried blob detection to find the interest regions directly in the IR image and correlate their location to the regular image. This can be used to create a ML model for determining whether a person is comfortable in the given temperature or not from seeing a regular picture of them.
+For this project, we were able to complete the face ellipse cropping portion. We have yet to rotate and scale the ellipses for all of the data.
+
+### Part 2: Blob detection
+After an ellipse of the face is found, we want to detect the hottest features on the face as well as other potential regions of interest. Initiallyt, the goal was to line up checks, forehead, lips, etc. in the thermal image and the color image, but this was challenging and not as benifical in the long term as we initially thought. Instead, we tried blob detection to find the interest regions directly in the thermal image and correlate their location to the color image. This can be used to create a ML model for determining whether a person is comfortable or not in the given temperature.
 
 ![small ir](https://i.imgur.com/NpZXZin.png)
 
 
 # Implementations and Analysis
-### Part 1
+### Part 1: Face ellipse (Karl)
 #### Color image:
 1. Run harr cascade face detection on the first image.
 
-2. Since the result of the face detection only returns a rough area of where it thinks the face is, we extend the detected face region by a substantial percentage so that the entire head is in the frame. At this point, we crop out the head region in the 1st and 10th images of the headshot sequence. 
-Below is what we have after the first two steps.
-The green box is the result of the harr cascade face detection.
-The blue box is the region that we crop out to use for the remaining steps.
+2. Since the result of the face detection only returns a rough area of where it thinks the face is, we extend the detected face region by a substantial percentage so that the entire head is in the frame. At this point, we crop out the head region in the 1st and 10th images of the headshot sequence.
+
+Below is what we have after the first two steps. The green box is the result of the harr cascade face detection. The blue box is the region that we crop out to use for the remaining steps.
 [img]
 
 3. Then, we run Canny edge detector on the two headshot images. Canny returns a binary image where only strong edges are detected.
@@ -73,7 +75,33 @@ The blue box is the region that we crop out to use for the remaining steps.
 10. Finally, we are able to crop out the ellipse of the face region of the 1st image.
 [img]
 
-### Part 2
+#### Thermal image:
+1. Run harr cascade face detection on the first image.
+
+2. Since the result of the face detection only returns a rough area of where it thinks the face is, we extend the detected face region by a substantial percentage so that the entire head is in the frame. At this point, we crop out the head region in the 1st image.
+
+Below is what we have after the first two steps. The green box is the result of the harr cascade face detection. The blue box is the region that we crop out to use for the remaining steps.
+[img]
+
+3. Now, we threshold the grayscale image with a simple threshold of [50,255].
+[img]
+
+4. Next, we erode the thresholded image.
+[img]
+
+5. We keep the largest object of the image (the head). This helps erase edges that were in the background of the image.
+
+6. Then we perform dilate the image.
+
+7. Now that we have a single connected component, we are able to find the contours of the binary image. 
+[img]
+
+8. Using the contour points, we can fit an ellipse to the image. This allows us to create a mask that is the shape of the ellipse.
+
+9. Finally, we are able to crop out the ellipse of the face region of the 1st image.
+[img]
+
+### Part 2: Blog detection (Joseph)
 CV has a library for SimpleBlobDetection. It was challenging to run that on the IR images since they are so small and the blob detection wants to run on larger images. Running the blob detection on a regular image finds the part of the image that are most light.  We turn off shape detecting and choose intensity and size detection properties.
 
 ![regular blob](https://i.imgur.com/lcu9SUk.png)<br>
