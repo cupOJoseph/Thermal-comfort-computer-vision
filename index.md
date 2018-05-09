@@ -21,7 +21,7 @@ We compiled a dataset with roughly 2000+ color and thermal headshots of people. 
 
 Below are samples of the raw color and thermal images that the camera system captured.
 ![Karl regular](https://i.imgur.com/6wLcmen.png)<br>
-[colorStart.png]
+![colorStart.png](https://i.imgur.com/CRAvpQd.png)
 Karl Color
 
 ![Karl ir](https://i.imgur.com/OuMFuOl.png) <br>
