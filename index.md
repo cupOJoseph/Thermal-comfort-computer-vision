@@ -26,10 +26,9 @@ Below are samples of the raw color and thermal images that the camera system cap
 
 #### Karl Thermal
 ![irStart.png](https://i.imgur.com/3ujnOVf.png) <br>Thermal image used as input for Part 1.<br>
-![Karl ir](https://i.imgur.com/OuMFuOl.png) <br>Theraml image used as input for Part 2.
+![Karl ir](https://i.imgur.com/OuMFuOl.png) <br>Thermal image used as input for Part 2.
 
-### Our goals for this class project
-Our goals for this project are:
+### Our goals for this class project:
 1. Fit an ellipse to the facial region of each image (both color and thermal).
 2. Detect specific regions on the face that have the potential to be useful for predicting thermal comfort.
 
