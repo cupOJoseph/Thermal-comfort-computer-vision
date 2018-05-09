@@ -25,7 +25,7 @@ Below are samples of the raw color and thermal images that the camera system cap
 ![Karl regular](https://i.imgur.com/6wLcmen.png)<br>Color image used as input for Part 2.<br>
 
 #### Karl Thermal
-[irStart.png](https://i.imgur.com/3ujnOVf.png) <br>Thermal image used as input for Part 1.<br>
+![irStart.png](https://i.imgur.com/3ujnOVf.png) <br>Thermal image used as input for Part 1.<br>
 ![Karl ir](https://i.imgur.com/OuMFuOl.png) <br>Theraml image used as input for Part 2.
 
 ### Our goals for this class project
