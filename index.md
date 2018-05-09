@@ -21,10 +21,12 @@ We compiled a dataset with roughly 2000+ color and thermal headshots of people. 
 
 Below are samples of the raw color and thermal images that the camera system captured.
 ![Karl regular](https://i.imgur.com/6wLcmen.png)<br>
-Karl Regular 1
+[colorStart.png]
+Karl Color
 
 ![Karl ir](https://i.imgur.com/OuMFuOl.png) <br>
-Karl IR
+[irStart.png]
+Karl Thermal
 
 ### Our goals for this class project
 Our goals for this project are:
@@ -48,54 +50,39 @@ After an ellipse of the face is found, we want to detect the hottest features on
 ### Part 1: Face ellipse (Karl)
 #### Color image:
 1. Run harr cascade face detection on the first image.
-
 2. Since the result of the face detection only returns a rough area of where it thinks the face is, we extend the detected face region by a substantial percentage so that the entire head is in the frame. At this point, we crop out the head region in the 1st and 10th images of the headshot sequence.<br>Below is what we have after the first two steps. The green box is the result of the harr cascade face detection. The blue box is the region that we crop out to use for the remaining steps.
-[img]
-
+[colorFaceDetect.png]
 3. Then, we run Canny edge detector on the two headshot images. Canny returns a binary image where only strong edges are detected.
-[img]
-
+[colorCanny.png]
 4. Next, we find the absolute value of the difference between the two Canny images. We assume that the person's head is in the foreground and everything in the background is much further away. The sequence of 10 headshots takes around 1 second to perform, so the likelyhood that the person moves (even slightly) is high. Because they are in the foreground of the image, the distance that they move (in terms of pixels) is larger than the distance that the background moves. 
-[img]
-
+[colorDiff.png]
 5. Now, we perform a series of erosions and dilations on the image.
-[img]
-
+[colorDilateErode.png]
 6. Then we keep the largest object of the image (the head). This helps erase edges that were in the background of the image.
-
 7. We perform more erosions and dilations on the image.
-
+[colorLargestObj.png]
 8. Now that we have a single connected component, we are able to find the contours of the binary image. 
-[img]
-
 9. Using the contour points, we can fit an ellipse to the image.
-
+[colorContoursEllipse.png]
 10. Finally, we are able to crop out the ellipse of the face region of the 1st image.
-[img]
+[colorResult.png]
 
 #### Thermal image:
 1. Run harr cascade face detection on the first image.
-
 2. Since the result of the face detection only returns a rough area of where it thinks the face is, we extend the detected face region by a substantial percentage so that the entire head is in the frame. At this point, we crop out the head region in the 1st image.<br>Below is what we have after the first two steps. The green box is the result of the harr cascade face detection. The blue box is the region that we crop out to use for the remaining steps.
-[img]
-
+[irFaceDetect.png]
 3. Now, we threshold the grayscale image with a simple threshold of [50,255].
-[img]
-
+[irThreshold.png]
 4. Next, we erode the thresholded image.
-[img]
-
+[irErode.png]
 5. We keep the largest object of the image (the head). This helps erase edges that were in the background of the image.
-
 6. Then we dilate the image again.
-
 7. Now that we have a single connected component, we are able to find the contours of the binary image. 
-[img]
-
+[irLargestObj.png]
 8. Using the contour points, we can fit an ellipse to the image. This allows us to create a mask that is the shape of the ellipse.
-
+[irContourEllipse.png]
 9. Finally, we are able to crop out the ellipse of the face region of the 1st image.
-[img]
+[irResult.png]
 
 ### Part 2: Blog detection (Joseph)
 CV has a library for SimpleBlobDetection. It was challenging to run that on the IR images since they are so small and the blob detection wants to run on larger images. Running the blob detection on a regular image finds the part of the image that are most light.  We turn off shape detecting and choose intensity and size detection properties.
@@ -106,14 +93,18 @@ Less useful
 ![Karl face with red dots in ir](https://i.imgur.com/HYUTsag.png)<br>
 More useful
 
-
 Our points of interest are places where there is an especially dark blob in a light section or especially light blob in a dark section.  Being good insulators, the eyebrows seems to often get caught with a large detect, which could be better, but also makes sense. Aligning the key points must also be done a bit intelligently since a the faces are not perfectly aligned between the regular/IR images nor are the image proportions the same.
 
 ![final](https://i.imgur.com/fGQRBme.png)
 
 # Conclusions
+#### Karl's conclusions:
+- The first method we tried for fitting the ellipse was skin detection. This had terrible results.
+- Using the difference to detect the foreground object is only good if the Canny edge detection is performed first.
+- If there is a light in the background (ceiling light or window), then the color image nearly useless for thermal comfort prediction becasue the face becomes a silhouette with very little color difference on the skin.
+- The ir image will be the best way to predict thermal comfort. However, our thermal camera has an extremely small resolution. This poses the the biggest problem on our dataset. 
 
-Joseph's conclusions:
+#### Joseph's conclusions:
 - Formatting image data for different processes is hard.
 - A model for guessing Thermal Comfort given an IR image seems plausible.
 - A model for guessing Thermal Comfort given a regular image of a face seems less plausible.
